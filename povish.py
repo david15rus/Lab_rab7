@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import json
+import xml.etree.ElementTree as ET
 import sys
 
 # Условние задания
@@ -80,15 +80,17 @@ if __name__ == '__main__':
             if count == 0:
                 print("Магазин с таким названием не найден")
 
-        elif command.startswith('load '):
+        elif command.startswith('load'):
             parts = command.split(' ', maxsplit=1)
-            with open(parts[1], 'r') as f:
-                products = json.load(f)
+            with open(parts[1], 'w') as f:
+                tree = ET.parse(f)
+                root = tree.getroot()
 
         elif command.startswith('save '):
             parts = command.split(' ', maxsplit=1)
             with open(parts[1], 'w') as f:
-                json.dump(products, f)
+                doc = ET.Element(f)
+                tree = ET.ElementTree(doc)
 
         elif command == 'help':
             # Вывести справку о работе с программой.
