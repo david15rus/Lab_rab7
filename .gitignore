@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # files of JSON
-.JSON
+*.JSON
 
 # files of XML
-.xml
+*.xml
