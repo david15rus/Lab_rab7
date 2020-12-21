@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
             products.append(product)
             if len(product) > 1:
-                products.sort(key=lambda item: item.get('name', ''))
+                products.sort(key=lambda item: item.get('shop', ''))
 
         elif command == 'list':
             line = '+-{}-+-{}-+-{}-+-{}-+'.format(
@@ -67,18 +67,18 @@ if __name__ == '__main__':
 
             print(line)
 
-        elif command.startswith('select'):
-            name_user = input("Введите название интересующего магазина ")
-
+        elif command.startswith('select '):
+            parts = command.split(' ', maxsplit=1)
             count = 0
+
             for product in products:
-                if name_user == product.get('shop'):
+                if parts[1] == product.get('shop').lower():
                     count += 1
                     print(
                         '{:>4}: {} {}'.format(count, product.get('coast', ' '), product.get('name', ' '))
                     )
-            if count == 0:
-                print("Магазин с таким названием не найден")
+                if count == 0:
+                    print("Магазин с таким названием не найден")
 
         elif command.startswith('load '):
             parts = command.split(' ', maxsplit=1)
